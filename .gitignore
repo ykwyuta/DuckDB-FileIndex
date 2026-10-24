@@ -1,0 +1,6 @@
+/target/
+/build/
+__pycache__/
+*.pyc
+/demo/*.yyidx
+/demo/*.idx

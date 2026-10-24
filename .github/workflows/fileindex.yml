@@ -1,0 +1,46 @@
+name: DuckDB fileindex extension
+
+on:
+  push:
+    branches: [master, main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  extension:
+    name: fileindex (${{ matrix.os }})
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-2022, ubuntu-24.04]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/cache@v4
+        with:
+          path: target/fileindex-sdk
+          key: fileindex-sdk-v1.4.1-${{ runner.os }}-v2
+      - name: Build and standalone CLI integration tests
+        run: python tools/build.py --test
+      - name: Performance and source record fetch verification
+        shell: bash
+        run: |
+          if [ "$RUNNER_OS" = Windows ]; then
+            CLI=target/fileindex-sdk/duckdb.exe
+            EXT=target/fileindex-build/Release/fileindex.duckdb_extension
+          else
+            CLI=target/fileindex-sdk/duckdb
+            EXT=target/fileindex-build/fileindex.duckdb_extension
+          fi
+          python tests/benchmark.py --duckdb "$CLI" --extension "$EXT" --rows 100000 --work target/fileindex-benchmark
+          python tests/benchmark.py --duckdb "$CLI" --extension "$EXT" --rows 100000 --composite --work target/fileindex-composite-benchmark
+      - name: Package extension and offline documentation
+        run: python tools/package.py --test
+      - uses: actions/upload-artifact@v4
+        with:
+          name: fileindex-duckdb-1.4.1-${{ runner.os }}-x64
+          path: target/fileindex-dist/

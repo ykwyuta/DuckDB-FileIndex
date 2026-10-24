@@ -1,0 +1,23 @@
+Additional permission under GNU GPL version 3 section 7
+
+If you modify this Program, or any covered work, by linking or combining
+it with the Microsoft Edge WebView2 Loader (WebView2LoaderStatic.lib or
+WebView2Loader.dll, as distributed in the Microsoft.Web.WebView2 SDK), or
+a modified version of that library, containing parts covered by the terms
+of the license of the Microsoft.Web.WebView2 SDK, the licensors of this
+Program grant you additional permission to convey the resulting work.
+Corresponding Source for a non-source form of such a combination shall not
+include the source code for the parts of the Microsoft Edge WebView2 Loader
+used as well as that of the covered work.
+
+----------------------------------------------------------------------------
+
+GNU GPL バージョン 3 第 7 条に基づく追加の許可（参考訳。効力を持つのは上の英文）
+
+このプログラムまたは対象著作物を改変して、Microsoft Edge WebView2 Loader
+（Microsoft.Web.WebView2 SDK で配布される WebView2LoaderStatic.lib または
+WebView2Loader.dll）またはその改変版であって Microsoft.Web.WebView2 SDK の
+ライセンスの対象となる部分を含むものとリンクまたは結合する場合、このプログラムの
+ライセンサーは、その結果の著作物を頒布する追加の許可を与えます。そのような結合物の
+非ソース形式に対応するソースには、対象著作物のソースコードは含めますが、使用している
+Microsoft Edge WebView2 Loader の部分のソースコードを含める必要はありません。
