@@ -23,8 +23,7 @@ def main():
     shutil.copy2(extension, args.output)
     for name in ['README.md', 'VALIDATION.md', 'FORMAT.md']:
         shutil.copy2(ROOT / name, args.output)
-    for name in ['COPYING', 'COPYING.EXCEPTION']:
-        shutil.copy2(REPO / name, args.output)
+    shutil.copy2(ROOT / 'LICENSE', args.output)
     shutil.copy2(args.sdk / 'duckdb-1.4.1/LICENSE', args.output / 'LICENSE-DUCKDB.txt')
     source = args.sdk / 'duckdb-1.4.1'
     for directory, _, names in os.walk(source):
@@ -43,9 +42,8 @@ def main():
     for name in ['src', 'tools', 'tests', 'demo', 'docs', '.github']:
         shutil.copytree(ROOT / name, source_output / name, dirs_exist_ok=True, ignore=ignore)
     for name in ['CMakeLists.txt', 'README.md', 'FORMAT.md', 'VALIDATION.md',
-                 'COPYING', 'COPYING.EXCEPTION', '.gitignore', '.gitattributes', 'NOTICE.md']:
+                 'LICENSE', '.gitignore', '.gitattributes']:
         shutil.copy2(ROOT / name, source_output / name)
-    shutil.copy2(ROOT / 'NOTICE.md', args.output)
     if args.test:
         cli = args.sdk.resolve() / ('duckdb.exe' if sys.platform == 'win32' else 'duckdb')
         with tempfile.TemporaryDirectory(prefix='fileindex-package-', dir=args.output.parent) as temporary:

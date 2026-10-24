@@ -178,7 +178,7 @@ class ExtensionTests(unittest.TestCase):
         index.write_bytes(data)
 
     def test_v1_independent_binary_fixture(self):
-        # Build the documented 0.1.0 binary layout independently of the extension's writer.
+        # Build the documented v1 binary layout independently of the extension's writer.
         source = self.csv_file('v1.csv', ['id','name','amount'],
                                [['2','two','2'], ['\\N','null','0'], ['-1','minus','1'], ['2','dup','3']])
         control = self.create(source)
